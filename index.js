@@ -4,8 +4,6 @@ const Joi = require('joi');
 
 app.use(express.json());
 
-
-
 const genres = [
     {
         id: 1,
@@ -70,7 +68,8 @@ app.delete('/api/genres/:id', (req, res) => {
     genres.splice(index, 1);
     
     res.send(genre);
-})
+});
+
 function validateGenre(genre) {
     const schema = {
         type: Joi.string().min(3).required()
