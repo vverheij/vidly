@@ -1,22 +1,18 @@
 const express = require('express');
 const app = express();
 const Joi = require('joi');
+const logger = require('./logger');
+const authenticator = require('./.authenticator');
 
 app.use(express.json());
 
+app.use(logger);
+app.use(authenticator);
+
 const genres = [
-    {
-        id: 1,
-        type: "Mistery"
-    },
-    {
-        id: 2,
-        type: "Horor"
-    },
-    {
-        id: 3,
-        type: "Fantasy"
-    }
+    { id: 1, type: "Mistery"},
+    { id: 2, type: "Horor"},
+    { id: 3, type: "Fantasy"}
 ]
 app.get('/',(req, res) => {
     //console.log(`request received on port ${port}`);
