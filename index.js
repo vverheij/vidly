@@ -1,13 +1,15 @@
 const express = require('express');
-const app = express();
 const Joi = require('joi');
 const logger = require('./logger');
-const authenticator = require('./.authenticator');
+const authenticator = require('./authenticator');
+
+const app = express();
 
 app.use(express.json());
 
 app.use(logger);
 app.use(authenticator);
+app.use(express.urlencoded());
 
 const genres = [
     { id: 1, type: "Mistery"},
