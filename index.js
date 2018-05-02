@@ -1,21 +1,24 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 const express = require('express');
-const logger = require('./logger');
+//const logger = require('./logger');
 const genres = require('./routes/genres')
-const authenticator = require('./authenticator');
+const customers = require('./routes/customers')
+//const authenticator = require('./authenticator');
 
 const app = express();
+
 mongoose.connect('mongodb://localhost/vidly')
  .then(()=> console.log('connected to mongodb'))
  .catch((err) => console.error('could not connect to mongodb'));
 
 app.use(express.json());
 
-app.use(logger);
-app.use(authenticator);
+//app.use(logger);
+//app.use(authenticator);
 //app.use(express.urlencoded());
-app.use('/api/genres', genres)
+app.use('/api/genres', genres);
+app.use('/api/customers', customers);
 
 app.get('/',(req, res) => {
     //console.log(`request received on port ${port}`);

@@ -12,12 +12,6 @@ const genreSchema = new mongoose.Schema({
     }
 });
 
-// const genres = [
-//     { id: 1, type: "Mistery"},
-//     { id: 2, type: "Horror"},
-//     { id: 3, type: "Fantasy"}
-// ]
-
 const Genre = mongoose.model('genre', genreSchema);
 
 
@@ -29,7 +23,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const genre = await Genre.findById(req.params.id);
     //const genre = Genres.find(g => g.id === parseInt(req.params.id));
-    if (!genre) return res.status(404).send('Genre with the given id not found');
+    if (!genre) return res.status(404).send('Customer');
     
     res.send(genre);
 });
