@@ -6,7 +6,7 @@ const genres = require('./routes/genres')
 const customers = require('./routes/customers')
 //const authenticator = require('./authenticator');
 
-const app = express();
+const app = express();  
 
 mongoose.connect('mongodb://localhost/vidly')
  .then(()=> console.log('connected to mongodb'))
