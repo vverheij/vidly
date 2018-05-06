@@ -12,12 +12,14 @@ const authorSchema = new mongoose.Schema({
 
 const Author = mongoose.model('Author', authorSchema);
 
+//embedded document
 const courseSchema = new mongoose.Schema({
     name: String,
-        author: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Author'
-        } 
+    //author: authorSchema
+    author: {
+        type: authorSchema,
+        required: true
+    }
 });
 
 const Course = mongoose.model('Course', courseSchema);
@@ -50,6 +52,31 @@ async function listCourses(){
     console.log(courses);
 }
  
-//createAuthor('Mosh','My Bio','My Website');
-createCourse('Node Course','5aeec9505732710f1ce46712')
+// async function updateAuthor(courseId) {
+//     const course = await Course.findById(courseId);
+//     course.author.name = 'Mosh Hamedani';
+//     course.save();
+// }
+
+//update directly in database
+// async function updateAuthor(courseId) {
+//     const course = await Course.update({_id: courseId}, {
+//         $set: {
+//             'author.name': 'John Smith'
+//         }
+//     });
+// }
+
+// remove embedded property or document
+async function updateAuthor(courseId) {
+    const course = await Course.update({_id: courseId}, {
+        $unset: {
+            //'author.name': ''
+            'author': ''
+        }
+    });
+}
+
+//createCourse('Node Course',new Author({name: 'Mosh'}))
+updateAuthor('5aeee18b3e946c1c0c2eed91');
 //listCourses();
