@@ -14,10 +14,10 @@ const Author = mongoose.model('author', authorSchema);
 
 const courseSchema = new mongoose.Schema({
     name: String,
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Author'
-    }
+        author: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'author'
+        } 
 });
 
 const Course = mongoose.model('course', courseSchema);
@@ -43,10 +43,15 @@ async function createCourse(name, author) {
 }
 
 async function listCourses(){
-    const courses = await Course.find().select('name author');
+    const courses = await Course
+    .find()
+    .populate('author','name -_id')
+    .select('name author');
     console.log(courses);
 }
  
 //createAuthor('Mosh','My Bio','My Website');
-//createCourse('Node Course','5aecbdb6b349893c22e228d1')
+//createCourse('Node Course','5aeec9505732710f1ce46712')
 listCourses();
+
+
