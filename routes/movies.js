@@ -1,26 +1,31 @@
-const {Movie, validate} = require('../models/genre');
+const {Movie, validate} = require('../models/movie');
+//const {Genre} = require('../models/genre');
 const mongoose = require('mongoose');
-const Joi = require('joi');
 const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const genres = await Movie.find().sort('title');
-    res.send(genres);
+    const movies = await Movie.find();
+    res.send(movies);
 });
 
-router.post('/',async (req, res) => {
+// router.post('/',async (req, res) => {
     
-    //const result = validate(req.body);
+//     //const result = validate(req.body);
+//     //if (result.error) return res.send(result.error.details[0].message);
 
-    //if (result.error) return res.send(result.error.details[0].message);
+//     let movie = new Movie({
+//         title: req.body.title,
+//         genre: {
+//             _id: genre._id,
+//             name: genre.name
+//         },
+//         numberInStock: req.body.numberInStock,
+//         dailyRentalRate: req.body.dailyRentalRate
+//     })
+//     //genres.push(genre);
+//     movie = await movie.save();
+//     res.send(movie);
+// });
 
-    let movie = new Movie({
-        title: req.body.title
-    })
-
-
-    //genres.push(genre);
-    movie = await movie.save();
-    res.send(movie);
-});
+module.exports = router;
