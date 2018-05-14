@@ -19,7 +19,7 @@ const customerSchema = new mongoose.Schema({
         maxLength: 50
     }
 });
-
+//
 const Customer = mongoose.model('customer', customerSchema);
 
 function validateCustomer(customer) {
