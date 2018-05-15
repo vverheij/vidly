@@ -26,6 +26,7 @@ router.post('/', async (req, res) => {
         dailyRentalRate: req.body.dailyRentalRate
     });
     await movie.save();
+    res.send(movie);
 });
 
 router.put('/:id', async (req, res) => {
