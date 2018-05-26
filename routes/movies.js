@@ -59,9 +59,9 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const movie = await Movie.findByIdAndRemove(req.params.id);
     //const genre = genres.find(g =>g.id === parseInt(req.params.id));
-    if (!genre) return res.status(404).send('Movie with given id not found');
+    if (!movie) return res.status(404).send('Movie with given id not found');
 
-    res.send(genre);
+    res.send(movie);
 });
 
 module.exports = router;
