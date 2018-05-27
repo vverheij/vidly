@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     const genre = await Genre.findById(req.body.genreId);
     if (!genre) return res.status(400).send('Invalid genre');
 
-    let movie = new Movie({
+    const movie = new Movie({
         title: req.body.title,
         genre: {
             _id: genre._id,
@@ -49,11 +49,8 @@ router.put('/:id', async (req, res) => {
         }, 
         {new: true}
     );
-    //const genre = genres.find(g =>g.id === parseInt(req.params.id));
-    if (!genre) return res.status(404).send('Genre with given id not found');
-   
-    //genre.name  = req.body.name;
-    res.send(genre);
+    
+    res.send(movie);
 });
 
 router.delete('/:id', async (req, res) => {
