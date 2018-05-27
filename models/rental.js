@@ -63,6 +63,9 @@ function validateRental(rental) {
         movieId: Joi.string().required()
     };
 
+    // if (!mongoose.Types.ObjectId.isValid(req.body.customerId))
+    //     return res.status(400).send('Invalid customer');
+
     return result = Joi.validate(rental, schema);
 }
 
