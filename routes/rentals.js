@@ -1,3 +1,4 @@
+const auth = require('../middleware/auth');
 const {Rental, validate} = require('../models/rental');
 const {Movie} = require('../models/movie');
 const {Customer} = require('../models/customer');
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
     res.send(rentals);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -43,6 +44,7 @@ router.post('/', async (req, res) => {
     // movie.numberInStock--;
     // movie.save();
     
+    // Fawn maakt van deze operaties een transactie
     try {
         new Fawn.Task()
             .save('rentals', rental)
@@ -59,7 +61,7 @@ router.post('/', async (req, res) => {
     
 });
 /*
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     
@@ -86,7 +88,7 @@ router.put('/:id', async (req, res) => {
     res.send(genre);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const movie = await Rental.findByIdAndRemove(req.params.id);
     //const genre = genres.find(g =>g.id === parseInt(req.params.id));
     if (!genre) return res.status(404).send('Movie with given id not found');

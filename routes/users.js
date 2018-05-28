@@ -1,3 +1,6 @@
+const auth = require('../middleware/auth') // this is about authorisation (permissions), authentication is about determining if the username/password was valid.
+const jwt = require('jsonwebtoken');
+const config = require('config');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const {User, validate} = require('../models/user');
@@ -10,15 +13,19 @@ const router = express.Router();
 //     res.send(users);
 // });
 
-// router.get('/:id', async (req, res) => {
-//     const user = await User.findById(req.params.id);
-
-//     if (!user) return res.status(404).send('Invalid user');
+// this /me is not the same as /:id, the latter is for providing an id paramater
+// which is a security risk (can provide anybody's id)
+// with /me we create an endpoint for currently logged in user.
+router.get('/me', auth, async (req, res) => {
     
-//     res.send(user);
-// });
+    // in the auth middleware function we 
+    const user = await User.findById(req.user._id).select('-password');
+    res.send(user);
+});
 
-router.post('/',async (req, res) => {
+// bij het registeren krijgt de response een extra header met het jwt token. 
+// bij aanroepen van bepaalde (c(r)ud) endpoints wordt deze header uitgelezen en verified. 
+router.post('/', async (req, res) => {
     const result = validate(req.body);
 
     if (result.error) return res.send(result.error.details[0].message);
@@ -31,12 +38,12 @@ router.post('/',async (req, res) => {
     );
     
     const salt = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(req.body.password, salt);
-    user.password = hashed;
-
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    user.password = hashedPassword;
     await user.save();
 
-    res.send(_.pick(user, ['_id', 'name', 'email']));
+    const token = user.generateAuthToken();
+    res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 // router.put('/:id', async (req, res) => {
