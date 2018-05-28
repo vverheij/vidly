@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const {User, validate} = require('../models/user');
 const mongoose = require('mongoose');
@@ -28,6 +29,10 @@ router.post('/',async (req, res) => {
     user = new User(
         _.pick(req.body, ['name', 'email', 'password'])
     );
+    
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(req.body.password, salt);
+    user.password = hashed;
 
     await user.save();
 
