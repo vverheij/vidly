@@ -1,3 +1,4 @@
+const admin = require('../middleware/admin');
 const auth = require('../middleware/auth');
 const {Genre, validate} = require('../models/genre');
 const mongoose = require('mongoose');
@@ -47,7 +48,10 @@ router.put('/:id', auth, async (req, res) => {
     res.send(genre);
 });
 
-router.delete('/:id', auth, async (req, res) => {
+// if the client sends a valid webtoken (auth) then de seconde middleware function (admin)
+// will check if the user is an admin, then the third middleware function (the route handler itself) 
+// will be executed
+router.delete('/:id', [auth, admin], async (req, res) => {
     const genre = await Genre.findByIdAndRemove(req.params.id);
     //const genre = genres.find(g =>g.id === parseInt(req.params.id));
     if (!genre) return res.status(404).send('Genre with given id not found');

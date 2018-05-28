@@ -37,6 +37,10 @@ router.post('/', async (req, res) => {
         _.pick(req.body, ['name', 'email', 'password'])
     );
     
+    // Here we ask bcrypt for a salt. This salt will be part of the hashed password
+    // Only the hashed password is saved. The salted part of the hash
+    // will be used to hash password again when the provides the password for subsequent logins.
+    // this the hashed provided req.body.password will be compared with the saved user.password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     user.password = hashedPassword;
