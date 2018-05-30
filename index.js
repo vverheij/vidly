@@ -1,3 +1,4 @@
+const error = require('./middleware/error');
 const config = require('config');
 const auth = require('./routes/auth');
 const Joi = require('joi');
@@ -26,7 +27,7 @@ mongoose.connect('mongodb://localhost/vidly')
 
 app.use(express.json());
 
-//app.use(logger);
+//app.use(logger); 
 //app.use(authenticator);
 //app.use(express.urlencoded());
 app.use('/api/genres', genres);
@@ -35,7 +36,7 @@ app.use('/api/movies', movies);
 app.use('/api/rentals', rentals);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
-
+app.use(error);
 
 app.get('/',(req, res) => {
     //console.log(`request received on port ${port}`);
