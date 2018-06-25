@@ -1,4 +1,5 @@
 const winston = require('winston');
+
 module.exports = function(err, req, res, next) {
     // log errors etc: 
     //winston.log('error', err.message); 
