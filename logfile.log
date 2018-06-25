@@ -7,3 +7,8 @@
 {"level":"error","message":"Something failed miserably in a promise!"}
 {"level":"error","message":"Could not get the genres."}
 {"level":"error","message":"Could not get the genres."}
+{"message":"Connected to MongoDB","level":"info"}
+{"name":"MongoNetworkError","message":"failed to connect to server [localhost:27017] on first connect [MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017]","level":"error"}
+{"name":"MongoNetworkError","message":"failed to connect to server [localhost:27017] on first connect [MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017]","level":"error"}
+{"message":"Connected to MongoDB","level":"info"}
+{"message":"Connected to MongoDB","level":"info"}
