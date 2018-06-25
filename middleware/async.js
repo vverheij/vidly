@@ -1,5 +1,5 @@
 
-// this is not replaced by a plugin module npm i express-async-errors
+// this is now replaced by a plugin module npm i express-async-errors
 
 // module.exports = function asyncMiddelWare(handler){
 //     return async(req, res, next) => {
