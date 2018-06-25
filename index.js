@@ -1,4 +1,5 @@
 require('express-async-errors');
+const winston = require('winston');
 const error = require('./middleware/error');
 const config = require('config');
 const auth = require('./routes/auth');
@@ -15,7 +16,8 @@ const rentals = require('./routes/rentals');
 const users = require('./routes/users');
 
 //const authenticator = require('./authenticator');
-
+//winston.add(winston.transports.File, {filename: 'logfile.log'});
+winston.add(winston.transports.File, { filename: 'logfile.log' });
 const app = express();  
 
 if (!config.get('jwtPrivateKey')){
