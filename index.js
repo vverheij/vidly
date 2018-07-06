@@ -7,6 +7,7 @@ require('./startup/routes')(app);
 require('./startup/db')();
 require('./startup/config')();
 require('./startup/validation')();
+require('./startup/prod')(app);
 
 //throw new Error('Something failed during startup');
 // const p = Promise.reject(new Error("Something failed miserably in a promise!"));
@@ -18,4 +19,6 @@ require('./startup/validation')();
 // });
 
 const port = process.env.port || 3001;
-app.listen(port,() => winston.info(`Server listening on port ${port}.`));
+const server = app.listen(port, () => winston.info(`Server listening on port ${port}.`));
+
+module.exports = server;
