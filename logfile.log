@@ -52,3 +52,17 @@
 {"message":"Connected to MongoDB","level":"info"}
 {"message":"Server listening on port 3001.","level":"info"}
 {"message":"Connected to MongoDB","level":"info"}
+{"message":"Server listening on port 3001.","level":"info"}
+{"name":"MongoNetworkError","message":"failed to connect to server [calhost:27017] on first connect [MongoNetworkError: getaddrinfo ENOTFOUND calhost calhost:27017]","level":"error"}
+{"message":"Server listening on port 3001.","level":"info"}
+{"message":"Connected to MongoDB","level":"info"}
+{"message":"Server listening on port 3001.","level":"info"}
+{"message":"Connected to MongoDB","level":"info"}
+{"message":"Server listening on port 3001.","level":"info"}
+{"message":"Connected to MongoDB","level":"info"}
+{"message":"Server listening on port 3001.","level":"info"}
+{"message":"mongodb://localhost/vidly","level":"info"}
+{"message":"Server listening on port 3000.","level":"info"}
+{"message":"mongodb://localhost/vidly","level":"info"}
+{"message":"Server listening on port 3000.","level":"info"}
+{"message":"mongodb://localhost/vidly","level":"info"}
