@@ -20,5 +20,5 @@ require('./startup/prod')(app);
 
 const port = process.env.port || 3001;
 const server = app.listen(port, () => winston.info(`Server listening on port ${port}.`));
-
+console.log(process.env.vidly_db);
 module.exports = server;
