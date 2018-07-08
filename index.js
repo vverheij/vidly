@@ -20,8 +20,10 @@ require('./startup/prod')(app);
 // });
 //console.log(config.get('db'));
 const port = process.env.PORT || 3000;
-const server = app.listen(process.env.PORT || 3000, () => winston.info(`Server listening on port ${port}.`));
-console.log(process.env.vidly_db);
+
+//const server = app.listen(process.env.PORT || 3000, () => winston.info(`Server listening on port ${port}.`));
+const server = app.listen(port, () => winston.info(`Server listening on port ${port}.`));
+//console.log(process.env.vidly_db);
 // app.listen(process.env.PORT || 3000, function(){
 //     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 //   });
